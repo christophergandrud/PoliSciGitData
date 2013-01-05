@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%
+% Using GitHub to Store and Collaborate on Political Science Data
+% Christopher Gandrud
+% 5 January 2013
+%%%%%%%%%%%%%%%%%
+
+% !Rnw weave = knitr
+
+\documentclass[a4paper]{article}
+\usepackage{fullpage}
+\usepackage[authoryear]{natbib}
+\usepackage{setspace}
+    \doublespacing
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=cyan,
+    urlcolor=cyan
+}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage[utf8]{inputenc} 
+
+% Set knitr global options
+<<ParentGlobalOpts, echo=FALSE>>=
+    opts_chunk$set(concordance=TRUE)
+    opts_chunk$set(fig.align='center')
+@
+
+%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Using GitHub to Store and Collaborate on Political Science Data}
+
+\author{Christopher Gandrud \\
+                {\emph{Yonsei University}}\footnote{\href{mailto:gandrud@yonsei.ac.kr}{gandrud@yonsei.ac.kr}} 
+
+\begin{document}
+
+\maketitle
+
+\begin{document}
+
+
+
+
+\end{document}
