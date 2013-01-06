@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%
 % Using GitHub to Store and Collaborate on Political Science Data
 % Christopher Gandrud
-% 5 January 2013
+% 6 January 2013
 %%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -30,14 +30,13 @@
 % Set knitr global options
 <<ParentGlobalOpts, echo=FALSE>>=
     opts_chunk$set(concordance=TRUE)
-    opts_chunk$set(fig.align='center')
 @
 
 %%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Using GitHub to Store and Collaborate on Political Science Data}
+\title{Using GitHub and R to Store and Collaborate on Political Science Data}
 
 \author{Christopher Gandrud \\
-                {\emph{Yonsei University}}\footnote{\href{mailto:gandrud@yonsei.ac.kr}{gandrud@yonsei.ac.kr}} 
+                {\emph{Yonsei University}}\footnote{\href{mailto:gandrud@yonsei.ac.kr}{gandrud@yonsei.ac.kr}}} 
 
 \begin{document}
 
@@ -45,7 +44,45 @@
 
 \begin{document}
 
+The file storage website GitHub\footnote{https://github.com/} offers political scientists unique opportunities to collaboratively develop data sets and research projects. GitHub was originally created as a way for software developers to collaboratively build software. It seems strange to suggest that this service would be useful for political scientists who are constructing data sets and writing research papers, not developing software. However, a software program and many quantitative political science data sets/research projects are fundamentally similar in that they are basically just collections of text files. So, if your data is stored in a plain-text format like comma-separated values (CSV), text-based source code files, like those in R, to create run your statistical analyses, and you are using a markup language like LaTeX to write your articles you can take full advantage GitHub's functions for storing, version controlling, and socially collaborating on your research projects.
 
+In this short article I will discuss how political scientists can take full advantage of GitHub in their research. In particular I will focus on how GitHub enables a very high level of collaboration between members of a research team and even those outside of it.
 
+\section{Social Data Analysis Code on GitHub}
+
+\section{Social Data on GitHub}
+
+I've created a simple function that loads plain-text data stored on GitHub into an R data frame. It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
+
+{\small
+<<LoadGist, message=FALSE>>=
+# Load source_GitHubData
+library(devtools)
+
+# The functions' gist ID is 4466237
+source_gist("4466237")
+@
+}
+
+\noindent To download the electoral disproportionality using \verb|source_GitHubData| type:\footnote{Note: it is not necessary to use the \texttt{paste} command to write the URL. I did this only so that it would fit within the page margins}
+
+{\small
+<<DispropDownload, message=FALSE, tidy=FALSE>>=
+# Create Disproportionality data UrlAddress object
+# Make sure the URL is for the "raw" version of the file
+UrlAddress <- paste("https://raw.github.com/christophergandrud/",
+                    "Disproportionality_Data/master/",
+                    "Disproportionality.csv", sep = "")
+
+# Download data
+Data <- source_GitHubData(url = UrlAddress)
+
+# Show variable names
+names(Data)
+@
+}
+
+\bibliographystyle{apsr}
+\bibliography{PoliSciGitStore.bib}
 
 \end{document}
