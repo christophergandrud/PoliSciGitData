@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%
 % Using GitHub to Store and Collaborate on Political Science Data
 % Christopher Gandrud
-% 6 January 2013
+% 7 January 2013
 %%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -48,11 +48,13 @@ The file storage website GitHub\footnote{https://github.com/} offers political s
 
 In this short article I will discuss how political scientists can take full advantage of GitHub in their research. In particular I will focus on how GitHub enables a very high level of collaboration between members of a research team and even those outside of it.
 
+\todo{Add info on selective incentives}
+
 \section{Social Data Analysis Code on GitHub}
 
 \section{Social Data on GitHub}
 
-I've created a simple function that loads plain-text data stored on GitHub into an R data frame. It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
+I've created a simple function that loads plain-text data stored on GitHub into an R data frame.\footnote{The function is based on \emph{devtools}' \citep{R-devtools} \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
 
 {\small
 <<LoadGist, message=FALSE>>=
@@ -64,23 +66,17 @@ source_gist("4466237")
 @
 }
 
-\noindent To download the electoral disproportionality using \verb|source_GitHubData| type:\footnote{Note: it is not necessary to use the \texttt{paste} command to write the URL. I did this only so that it would fit within the page margins}
+\noindent The URL for the raw version of the electoral disproportionality data is \url{http://bit.ly/Ss6zDO}.\footnote{I used bitly (\url{http://bitly.com/}) to shorten the URL so that it would fit on the page more easily. The full URL is: \url{https://raw.github.com/christophergandrud/Disproportionality_Data/master/Disproportionality.csv}.}  To download the data using \verb|source_GitHubData| simply type.
 
-{\small
 <<DispropDownload, message=FALSE, tidy=FALSE>>=
-# Create Disproportionality data UrlAddress object
-# Make sure the URL is for the "raw" version of the file
-UrlAddress <- paste("https://raw.github.com/christophergandrud/",
-                    "Disproportionality_Data/master/",
-                    "Disproportionality.csv", sep = "")
-
 # Download data
-Data <- source_GitHubData(url = UrlAddress)
+Data <- source_GitHubData(url = "http://bit.ly/Ss6zDO")
 
 # Show variable names
 names(Data)
 @
-}
+
+\noindent Note that by default \verb|source_GitHubData| loads CSV data. You can add the argument \verb|sep = "\t"| for tab-separated data files.
 
 \bibliographystyle{apsr}
 \bibliography{PoliSciGitStore.bib}
