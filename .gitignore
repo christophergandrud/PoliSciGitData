@@ -1,6 +1,5 @@
 # Have Git ignore the following files #
 #######################################
-
 # knitr/LaTeX byproduct files
 *.aux
 *.bbl
@@ -11,8 +10,8 @@ figure/*
 *.pdf
 *.gz
 *.tex
-
 # R byproduct files
 .Rproj.user
 .Rhistory
 .RData
+.DS_Store
