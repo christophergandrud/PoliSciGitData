@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%
 % Using GitHub to Store and Collaborate on Political Science Data
 % Christopher Gandrud
-% 9 January 2013
+% 10 January 2013
 %%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -29,27 +29,64 @@
 \title{Using GitHub and R to Store and Collaborate on Political Science Data}
 
 \author{Christopher Gandrud \\
-                {\emph{Yonsei University}}\footnote{\href{mailto:gandrud@yonsei.ac.kr}{gandrud@yonsei.ac.kr}}} 
+                {\emph{Yonsei University}}\footnote{Email: \href{mailto:gandrud@yonsei.ac.kr}{gandrud@yonsei.ac.kr}. I discuss the ideas from this article in much more detail in my forthcoming book ``Reproducible Research with R and RStudio" (Chapman and Hall).}} 
 
 \begin{document}
 
 \maketitle
 
-The file storage website GitHub\footnote{https://github.com/} offers political scientists unique opportunities to collaboratively develop data sets and research projects. GitHub was originally created as a way for software developers to collaboratively build software. It seems strange to suggest that this service would be useful for political scientists who are constructing data sets and writing research papers, not developing software. However, a software program and many quantitative political science data sets/research projects are fundamentally similar in that they are basically just collections of text files. So, if your data is stored in a plain-text format like comma-separated values (CSV), text-based source code files, like those in R, to create run your statistical analyses, and you are using a markup language like LaTeX to write your articles you can take full advantage GitHub's functions for storing, version controlling, and socially collaborating on your research projects.
+\begin{quote}
+  \emph{I can’t send you my data b/c I think you might find out I made an error. \#overlyhonestmethods  (tweeted by Charlisle Rainey, 1/10/2013)}
+\end{quote}
 
-In this short article I will discuss how political scientists can take full advantage of GitHub in their research. In particular I will focus on how GitHub enables a very high level of collaboration between members of a research team and even those outside of it.
+The cloud file storage website GitHub\footnote{https://github.com/} offers political scientists unique opportunities to collaboratively develop data sets that fit directly into a a highly reproducible workflow. In this brief article I am going to argue that, though not explicitly designed to host political science data, GitHub offeres many advantages over status quo tools for storing data in highly collaborative and reproducible ways.\footnote{GitHub can be used to store entire political science research projects, not just data \cite[see][]{Bowers2011}} GitHub is useful for enabling collaboration, particularly 
+
+GitHub was originally created as a way for software developers to collaboratively build software. It seems strange to suggest that this service would be useful for political scientists who are building and maintaining data sets, but not developing software. However, a software program and many quantitative political science data sets are fundamentally similar in that they are basically just collections of text files. So, if your data is stored in a plain-text format like comma-separated values (CSV), text-based source code files, like those in R, to create run your statistical analyses, and you are using a markup language like LaTeX to write your articles you can take full advantage GitHub's functions for storing,accessing, version controlling, and socially collaborating on you data sets.
+
+In this short article I will discuss how political scientists can take full advantage of GitHub in their research.
+
+In this article I focus on small to medium size data sets. GitHub
+
+\section{What do we need from cloud data storage?}
+
+A cloud storage service for reproducible political science data needs to enable at least four things: \emph{stable storage}, \emph{access}, \emph{version control}, and \emph{collaboration}. The service needs to be a stable and reliable platform for storing the data set. Data stored on it need to be accessible to both collaborators and people who wish to reproduce an analysis or use the data in a new project. A key part of access is that the data set, both developemtn and use, can be easily tied into researchers' workflow. The service needs to allow changes to be tracked over time so that the development of the data set can be understood and researchers to revert to old versions.\footnote{This is both a practicle consideration for the researcher who is developing the data set--sometimes unwanted changes are made that the reseacher wants to reverse--and is important for reproducing an analysis to access the data set used in the analysis.} Finally, a cloud data storage service should enable collaboration both between coauthors and others who might be able to add information or correct mistakes.
+
+\section{Saving data in reproducible formats}
+
+
 
 \section{The Political Science Status Quo}
 
-Political science data is often made available in three ways. Researchers either make their data available through a dedicated data hosting service, notably Dataverse\footnote{http://thedata.org/}, via a link on their professional website, or on a per request basis, i.e. you email the researcher asking for the data and hope they email back. 
+Political science data is often made available in three ways. Researchers either make their data available through a dedicated data hosting service, notably Dataverse\footnote{http://thedata.org/}, via a link on their professional website, or on a per request basis, i.e. you email the researcher asking for the data and hope they email back. Each of these methods of making data available have their strenghts (some less than others). They also lack major features that GitHub offers for storing, accessing, version controlling, and collaborating on data sets.  
+
+\paragrah{Stored locally/Ad hoc contact}
+
+The least robust and reproducible form of data storage currently used, is to store it locally on an individual's computer. This is not a very stable form of storage as anyone that lost all of their files when their computer died knows. The storer of the data can easily access the data when they are using that computer, but access for coathors can be limited. Access by non-coauthors is entirely at the discression of the researcher. Version control with Git or some other program is possible. Because access is limited to users of the computer the data is stored on, collaboration is extremely limited.
+
+\paragraph{Dropbox, and other non-Git cloud storage}
+
+Dropbox\footnote{\url{https://www.dropbox.com/}} and similar services like Google Cloud Drive\footnote{\url{https://drive.google.com/}} offer a much more robust form of storage. These services generally work by syncing files stored on individual computers with cloud servers. Access is also much better. These services usually can be accessed via desktop programs, mobile apps, and websites. Because files stored on your computer are automatically synced with the cloud serves it is very easy to incorporate these services into your workflow. These services also make it possible share individual files. You can also download data  
+
+\paragraph{Dataverse}
+
+Dataverse is a purpose built tool for research data storage. It is the most robust storage mehtod 
 
 \todo[inline]{Add info on selective incentives}
 
-\section{Social Data Analysis Code on GitHub}
+\section{Storing}
 
-\section{Social Data on GitHub}
+Git stores data in what it call's repositories, repos for short. You can think of these as parent folders for a research project or data set. GitHub hosts these folders remotely in the cloud.
 
-I've created a simple function that loads plain-text data stored on GitHub into an R data frame.\footnote{The function is based on \emph{devtools}' \citep{R-devtools} \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
+\paragraph{Binary files}
+
+\section{Accessing data}
+
+GitHub offeres a number of ways to make data publicly accessible. Public repositories can be viewed  and downloaded by anyone using the website. On a repositories webpage Plain-text data stored on GitHub can be directly loaded into R. This not only makes data gathering somewhat simpler--you don't have to go to a website, download a file, open it in Excel 
+
+
+\paragraph{Access directly from R}
+
+Loading this data normally takes a few lines of code, but I've created a function that simplifies the process of load data from GitHub into an R data frame.\footnote{The function is based on \emph{devtools}' \citep{R-devtools} \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
 
 <<LoadGist, message=FALSE, tidy=FALSE>>=
 # Load source_GitHubData
@@ -66,6 +103,47 @@ Data <- source_GitHubData(
 @
 
 \noindent Note that by default \verb|source_GitHubData| loads CSV data. You can add the argument \verb|sep = "\t"| for tab-separated data files.
+
+\section{Version control}
+
+\section{Collaboration}
+
+Compared to the status quo political science data storage methods GitHub is uniquely strong for enabling collaboration both between official project collaborators and others.
+
+It's important to emphasise that 
+
+\paragraph{Coauthors}
+
+Public repositories can have an unlimited number of collaborators.\foonote{On the repositories' GitHub site click \texttt{Settings} \textrightarrow \texttt{Collaborators}
+
+\paragraph{Issues}
+
+\paragraph{Automatically create websites with Pages}
+
+\paragraph{Repo Wiki}
+
+\paragraph{Follow a repository}
+
+If you are a GitHub member you can follow a public repository, even if you aren't a collaborator, that way you will be able to see any updates that are made to the data set it contains.
+
+\paragraph{Pull requests}
+
+\paragraph{Selective incentives}
+
+As political scientists we might wonder why people would contribute to improving publicly available data sets when they will not see a direct benefit. If a repository had many non-official contributors it would be impracticle to cite all of them whenever someone used the data set, for example.
+
+However, GitHub offers many ways  
+
+\paragraph{Passing on the data set}
+
+Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining it's entire version history. Simply add a collaborator to the repository. Then enter the collaborator's GitHub username.} They will then have the same privaleges to manage the repository as you did.
+
+\section{Conclusion}
+
+I've argued that Git and GitHub offer clear advantages for storing, accessing, version controlling, collaborating, on political science data. 
+
+
+
 
 \bibliographystyle{apsr}
 \bibliography{PoliSciGitStore.bib}
