@@ -41,13 +41,13 @@
 
 A data set is created, analyses are run, an article is published, the data set languishes. The researchers who create the data set move on to other projects. Maybe someone else is able to access the data and they update part of it for their own work, but the original is not changed and the updates not widely known about. Maybe another researcher finds a mistake in the original data set. They email the original authors suggesting corrections. The original authors may or may not make the changes. Some researchers may even be reluctant to make their data available at all because of a fear that someone may find a mistake in it. These are all examples of ways that the development and management of social science data sets do not take advantage of knowledge distributed in the social science community. These problems are partially caused by the data storage tools social sciencist use. Despite rapid recent advances in social technologies--Twitter, Facebook, Skype, and so on--the tools many social scientists use do not make it easy to collaboratively develop and verify data sets, especially for people not involved in creating the original data.
 
-In this brief article I show that GitHub\footnote{https://github.com/} offers a comprehensive data storage service for social scientists with unique tools for \emph{social data set development and verification}, i.e. correcting errors. GitHub also fits directly into a highly reproducible workflow, particularly one that also includes R.\footnote{GitHub can be used to store and develop entire social science research projects, not just data. However, I do not directly address this here.}
+In this brief article I show that GitHub\footnote{https://github.com/} offers a comprehensive data storage service for social scientists with unique tools for \emph{social data set development and verification}, i.e. correcting errors. GitHub also fits directly into a highly reproducible workflow, particularly one that also includes R.\footnote{GitHub can be used to store and develop entire social science research projects, not just data. However, I do not directly address these other topics here.}
 
-GitHub was originally created and is widely used as a tool for software developers to work together on software projects using the Git\footnote{\url{http://git-scm.com/}} version control system. Though GitHub is often used by social scientists for statistical package development\footnote{For example the \emph{Zelig} R package \citep{Zelig2008,R-zelig} is now hosted on GitHub. See \url{https://github.com/IQSS/Zelig}.} it seems strange to suggest that this service would be useful for social scientists for building and maintaining data sets. However, a software program and many social science data sets are fundamentally similar. They are basically just collections of text files.\footnote{Similarly, \citeauthor{Bowers2011} argues that data analysis is computer programming \citeyearpar[2]{Bowers2011}.} GitHub is just a means of storing and version controlling text files. So if a social scientist's data is in a plain-text format, such as comma-separated values (CSV) for quantitatitve data,\footnote{All major statistical programs as well as Microsoft Excel and Apple's Numbers can save and open files in plain-text formats like CSV.} and has accompanying files variable description files also in a plain text format--e.g. TXT plain text or Markdown (MD), then they can take full advantage of GitHub's features for social collaboration and verification.
+GitHub was originally created and is widely used as a tool for software developers to work together on software projects using the Git\footnote{\url{http://git-scm.com/}} version control system. Though GitHub is often used by social scientists for statistical package development\footnote{For example the \emph{Zelig} R package \citep{Zelig2008,R-zelig} is now hosted on GitHub. See \url{https://github.com/IQSS/Zelig}.} it seems strange to suggest that this service would be useful for social scientists for building and maintaining data sets. However, a software program and many social science data sets are fundamentally similar. They are basically just collections of text files. GitHub is just a means of storing and version controlling text files. So if a social scientist's data is in a plain-text format, such as comma-separated values (CSV) for quantitatitve data,\footnote{All major statistical programs as well as Microsoft Excel and Apple's Numbers can save and open files in plain-text formats like CSV.} and has accompanying files variable description files also in a plain text format--e.g. TXT plain text or Markdown (MD), then they can take full advantage of GitHub's features for social collaboration and verification.\footnote{See \citeaurthor{Bowers2011} \citep[3]{Bowers2011} for a discussion of the advantages of storing research files in plain-text format.}
 
 In this article I first discuss basic features that we would want from a cloud service to store social science data: stable storage, access, version control, and collaboration. Then I discuss how strong these features are in three methods currenlty used to store data in social science. Though they each have their strengths none of them encourages social data set development and verification.
 
-A few brief notes before getting started: To set up Git andGitHub see the GitHub page: \url{https://help.github.com/articles/set-up-git}. In this article I give examples thei GitHub website and from the command line. However, there are also very good graphical user interface versions of GitHub for Mac and Windows (see the set up page). I focus on GitHub, but you can also use other services that work with Git such as Bitbucket\footnote{\url{https://bitbucket.org/}} for many of the same functions. Finally, the methods I use in this article are suitable for small to medium size data sets (i.e. of about 100,000 observations or less) common in social science. Much larger data sets often cannot be efficiently stored in plain-text files, so GitHub is probably not a suitable storage service for them.
+A few brief notes before getting started: To set up Git andGitHub see the GitHub page: \url{https://help.github.com/articles/set-up-git}. In this article I give examples thei GitHub website and from the command line. However, there are also very good graphical user interface (GUI) versions of GitHub for Mac and Windows (see the set up page). I focus on GitHub, but you can also use other services that work with Git such as Bitbucket\footnote{\url{https://bitbucket.org/}} for many of the same functions. Finally, the methods I use in this article are suitable for small to medium size data sets (i.e. of about 100,000 observations or less) common in social science. Much larger data sets often cannot be efficiently stored in plain-text files, so GitHub is probably not a suitable storage service for them.
 
 \section{What do we need from cloud data storage?}
 
@@ -67,17 +67,39 @@ Dropbox and other non-Git cloud storage service offer a much more robust form of
 
 \paragraph{Dataverse}
 
-Many journals--Political Analysis for example--require data used in articles they publish to be uploaded to a service like Dataverse. Dataverse is a stable form of storage that is easily accessible for anyone with an internet connection. It is however, difficult to incorporate Dataverse into a research workflow. Unlike Dropbox, for example, there is no way to automatically update a data set on Dataverse. You have to point and click to upload data files for each version. It is difficult to access data through a statistical program such as Stata or R. The data needs to be downloaded by pointing and clicking and then loaded into these programs. It does have some version control features. It saves each version that is uploaded. Finally it is difficult to collaborate using Dataverse. Changes to a data set must be uploaded to the site manually, then manually downloaded. There are also no direct ways for non-coauthors to suggest changes.
+Many journals--Political Analysis for example--require data used in articles they publish to be uploaded to a service like Dataverse. Dataverse is a stable form of storage that is easily accessible for anyone with an internet connection. The standard version of Dataverse however, difficult to incorporate Dataverse into a research workflow.\footnote{It is possible to build a custom version of Dataverse with R integration.} Unlike Dropbox, for example, there is no way to automatically update a data set on Dataverse. You have to point and click to upload data files for each version. It is difficult to access data through a statistical program such as Stata or R. The data needs to be downloaded by pointing and clicking and then loaded into these programs. It does have some version control features. It saves each version that is uploaded. Finally it is difficult to collaborate using Dataverse. Changes to a data set must be uploaded to the site manually, then manually downloaded. There are also no direct ways for non-coauthors to suggest changes.
 
 Dataverse is good for what it is designed to do: store a snapshot of a data set for replicating specific published results. However, it is difficult to use it to store and access data as part of an ongoing workflow and it does not enable social data set development and verification.
 
 \section{Data on GitHub}
 
-GitHub can meet the four criteria for data set storage. In this section I will demonstrate how to use GitHub for data set storage, version control, access, and collaboration. I focus specifically on specific particularly important aspects of each feature rather than providing a complete overview of how to use Git and GitHub. In this section I refer to a data set stored on GitHub of countries' Gallagher Electoral Disproportionality index that I compiled \citep[see][]{Gallagher1991,Carey20011}. The data set and more information is avalialble at: \url{http://christophergandrud.github.com/Disproportionality_Data/}.
+GitHub can meet the four criteria for data set storage. In this section I will demonstrate how to use GitHub for data set storage, version control, access, and collaboration. I focus specifically on specific particularly important aspects of each feature rather than providing a complete overview of how to use Git and GitHub. In this section I refer to a data set stored on GitHub of countries' Gallagher Electoral Disproportionality index that I compiled \citep[see][]{Gallagher1991,Carey2011}. The data set and more information is avalialble at: \url{http://christophergandrud.github.com/Disproportionality_Data/}.
 
 \subsection{Storing and Version control}
 
-GitHub remotely stores files in what Git terms ``repositories", repos for short. You can think of repos as parent folders for a research project or data set. Git version controls these files and GitHub hosts these folders remotely in the cloud.
+Version control is an integral part of how GitHub stores files. GitHub remotely stores files in what Git terms ``repositories", repos for short. You can think of repos as parent folders for a data set. They would contain the data and description files. Git version controls these files and GitHub hosts these folders remotely in the cloud.\footnote{Specifically, GitHub files are stored on Rackspace (\url{http://www.rackspace.com/}).} 
+
+It is free to store files on GitHub as long as they are in public repositories. Anyone can see the contents of public repositories, including all previous versions.\foonote{Private repositories are available that allow only official contributors to see them. These require a paid account.} Users can have unlimited public repositories There is a soft storage size limit of one gigabyte per repository. This should be more than enough for most social science data sets if they are stored in plain-text formats. Here is a portion of the electoral disproporationality repository's main page:
+
+\includegraphics[width=0.46\textwidth]{images/MainPage.png}
+
+Git is a very powerful version control system, especially for text files. For these types of files, rather than saving the whole file like Dropbox and Dataverse, Git only saves the actual changes when you ``commit" a version of the files to the repository. Each commit in a repo is given a unique SHA-1 number identifiying it. Once changes made on your computer are commited they can be ``pushed" to the remote GitHub version of the repo. A repo's GitHub website allows you to view all of the changes that have been made to it.
+
+\paragraph{Version Control \& Contributor analytics}
+
+An important component of version control for GitHub for us here is that because Git only saves changes and it uniquely identifies who the changer is, it is possible to properly attribute every individuals contribution to a data set. GitHub has analytic capabilaties for organizing this data. You can find these by clicking on the \texttt{Graphs} button located near the top of each repository. This will give you access to graphs such as the one below (I've blurred the contributors names):
+
+\includegraphics[width=0.46\textwidth]{images/CommitHistory.png}
+
+\paragraph{Binary files}
+
+I mentioned that non-plain-text files--binary files--such like those Stata uses to store data are treated differently. Rather than only the specific changes being saved with each commit, the entire file is stored again. If the files are very very large this could take up a lot of storage space, though it is important to remember that pervious commits are commpressed. This is also a problem for all of the other data storage methods with version control discussed here. For very large data sets you will need to use a totally different cloud storage system like Rackspace or Amazon's S3.\footnote{\url{http://aws.amazon.com/s3/}} You will also not be able to get the sort of granualar contributor data for binary files that you do for text files. 
+
+If you absolutely must have binary files in a repository one solution to the space constraints problem is to have Git ignore it. You do this by including a text file called \texttt{.gitignore}  in your repository. In .gitignore simply type the binary file's name. Git will not version control it. This unfortuantely means that it will not be loaded on to GitHub when you push your files.
+
+\paragraph{Describe the data set with README files}
+
+Each folder in a GitHub repository can contain a files called README.\footnote{Actually each folder in a repository can contain one as well.} README files for data sets can contain information data source, variable descriptions, and so on, that would be useful for understanding it. GitHiub automatically displays the README file. If it is written in the Git Flavored Markdown\footnote{http://github.github.com/github-flavored-markdown/} markup language and called README.md it will also be automatically formatted. You can see part of the disproportionality data set's README.md above. 
 
 \paragraph{Tagging versions}
 
@@ -97,19 +119,32 @@ git push --tags
 
 \includegraphics[width=0.47\textwidth]{images/GitTag.png}
 
+\subsection{Accessing data}
 
-\paragraph{Binary files}
+There are many ways to access data stored on GitHub and incorporate it into your workflow. The simplest way is to use the GitHub website to actually edit files and commit changes. This can be handy for small changes and accessing the data from mobile devices. As I mentioned, changes can be committed on your computer and pushed to GitHub. You can use the command line version of Git or the GUI version of GitHub also. RStudio,\footnote{\url{http://www.rstudio.com/}} a program that strongly strong integrates R and markup languages like \LaTeX and Markdown, also includes Git. Here is a screenshot of this paper being written in RStudio. You can see the Git functions in the upper right. So it is possible to make changes to a repository, commit them and push them to GitHub all within the same program.
 
-\section{Accessing data}
+\includegraphics[width=0.46\textwidth]{images/RStudio.png}
 
-GitHub offeres a number of ways to make data publicly accessible. Public repositories can be viewed  and downloaded by anyone using the website. On a repositories webpage Plain-text data stored on GitHub can be directly loaded into R. This not only makes data gathering somewhat simpler--you don't have to go to a website, download a file, open it in Excel, then convert it to a file that can be opened by your statistical analysis program of choice. 
+\paragraph{Cloning a repo}
 
-\paragraph{Set up and Update}
+Repositories can be downloaded in full. This is called cloning. You can do this by clicking the \texttt{Clone in . . .} button on the GitHub repositories' website. It can also be done in the command line using the repository's address. For example, the disproportionality data's clonable address is: \url{https://github.com/christophergandrud/Disproportionality_Data.git}. 
 
+<<Clone, eval=FALSE, engine='sh'>>=
+git clone https://github.com/christophergandrud/
+  Disproportionality_Data.git
+@
 
-\paragraph{Access directly from R}
+\noindent Note that in real life the adderss needs to be on the same line. Also remember to change the working directory to the place where you want to have the repo saved using the \texttt{cd} command before cloning it.
 
-Loading this data normally takes a few lines of code, but I've created a function that simplifies the process of load CSV or tab-delimited data from GitHub into an R data frame.\footnote{The function is based on \emph{devtools}' \citep{R-devtools} \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
+Once you have cloned the repository you can role back to any previous version with the \texttt{checkout} command. For example if you wanted to role back to a tag called ``v3":
+
+<<Checkout, eval=FALSE, engine='sh'>>=
+git checkout v3
+@
+
+\paragraph{Access data directly from R}
+
+Loading data stored on GitHub into R for use in statistical analysis is very easy. I have created a function that loads plain-text formatted data from GitHub into an R data frame.\footnote{The function is based on \emph{devtools}' \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist\footnote{Gists host code snypests. See \url{https://gist.github.com/}.} at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \citep{R-devtools}.
 
 <<LoadGist, message=FALSE, tidy=FALSE>>=
 # Load source_GitHubData
@@ -121,7 +156,7 @@ devtools::source_gist("4466237")
 
 \includegraphics[width=0.4\textwidth]{images/Raw.png}
 
-The raw URL for tagged versions of the data are also accessible. The URL for the raw version of the electoral disproportionality data is \url{http://bit.ly/Ss6zDO}.\footnote{I used bitly (\url{http://bitly.com/}) to shorten the URL so that it would fit on the page more easily. The full URL is: \url{https://raw.github.com/christophergandrud/Disproportionality_Data/master/Disproportionality.csv}.}  To download the data using \verb|source_GitHubData| simply type.
+The raw URL for each commit and tagged versions of the data are also accessible if you want to always link to the same version of the file. The URL for the raw version of the electoral disproportionality data is \url{http://bit.ly/Ss6zDO}.\footnote{I used bitly (\url{http://bitly.com/}) to shorten the URL so that it would fit on the page more easily. The full URL is: \url{https://raw.github.com/christophergandrud/Disproportionality_Data/master/Disproportionality.csv}.}  To download the data using \verb|source_GitHubData| simply type.
 
 <<DispropDownload, message=FALSE, tidy=FALSE>>=
 # Download data
@@ -129,21 +164,30 @@ Data <- source_GitHubData(
           url = "http://bit.ly/Ss6zDO")
 @
 
-\noindent Note that by default \verb|source_GitHubData| loads CSV data. You can add the argument \verb|sep = "\t"| for tab-separated data files.
+\noindent Note that by default \verb|source_GitHubData| loads CSV data. You can add the argument \verb|sep = "\t"| for tab-separated data files. You can also specify \texttt{header = TRUE} (default) or \texttt{header = FALSE}.
 
 \paragraph{Citing GitHub data}
 
-When a researcher uses data they accessed via GitHub how can they cite it? A common practice is to cite the publication the data set was originally used in. However, this is incomplete in at least two ways. First, the version of the data used in the original publication may be different from that used 
-used later on. Second, it would be difficult to use this citation to acknowledge contributions made by contributors who did not work on the original data set, but contributed to later versions. In addition to citing the original publication I suggest using using the standard set by \cite{Aitman2007} and modifying it slightly to take advantage of the specific version information available on GitHub. They propose that data set citations should included:
+When a researcher uses data they accessed via GitHub how can they cite it? A common practice is to cite the publication the data set was originally used in. However, this is incomplete in at least two ways. First, the version of the data used in the original publication may be different from that used later on. Second, it would be difficult to use this citation to acknowledge contributions made by contributors who did not work on the original data set, but contributed to later versions. One solution is to use the standard set by \cite{Aitman2007}.\footnote{Dataverse uses a version of this standard.} They propose that data set citations should included:
 
 \begin{itemize}
   \item the authors name, 
   \item date,
   \item data set title,
-  \item a unique global identifier, such as a Digital Object Identifier (DOI),
+  \item a unique global identifier (UGI),
+  \item a universal numeric fingerprint (UNF),
+  \item a bridge service.
 \end{itemize}
 
-\section{Collaboration}
+\noindent The first three are self explanatory and shared with standard citations for other types of materials. Examples of UGI include Document Object Identifiers (DOI) and the Handel System.\footnote{\url{http://www.handle.net/}} These are unique identifiers for the data set. UNF's is a unique number for a particular version of the data set. Finally a bridge service allows you to use the DOI and UNF to link to the actual data set. 
+
+We can easily use \citeauthor{Aitman2007}'s citation standards for GitHub repositories. I would suggest citing specific tags of the data set. If these are not available you can cite the specific commit you used to produce results with the data.
+
+\paragraph{Showcase a data set with GitHub Pages}
+
+Each public repository's GitHub website allows anyone full access to the data. However, these pages may be confusing for those with out experience with a version control system. To solve this problem GitHub Pages allows you to very easily create a simple webpage for the repository. 
+
+\subsection{Collaboration}
 
 Compared to the status quo social science data storage methods GitHub is uniquely strong for enabling collaboration both between official project collaborators and others.
 
@@ -154,8 +198,6 @@ It's important to emphasise that
 Public repositories can have an unlimited number of collaborators.\footnote{On the repositories' GitHub site click \texttt{Settings} \textrightarrow \texttt{Collaborators}}
 
 \paragraph{Issues}
-
-\paragraph{Automatically create websites with Pages}
 
 \paragraph{Repo Wiki}
 
