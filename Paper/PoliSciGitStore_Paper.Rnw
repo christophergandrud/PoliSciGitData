@@ -67,28 +67,49 @@ Dropbox and other non-Git cloud storage service offer a much more robust form of
 
 \paragraph{Dataverse}
 
-Many journals--Political Analysis for example--require data used in articles they publish to be uploaded to a service like Dataverse. Dataverse is a stable form of storage that is easily accessible for anyone with an internet connection. It is however, difficult to incorporate services like Dataverse into a research workflow. Unlike Dropbox, for example, there is no way to automatically update a data set on Dataverse. You have to point and click to upload data each time. Also it is difficult to access data through a statistical program such as Stata or R. The data needs to be downloaded by pointing and clicking and then loaded into these programs. Because of this it is difficult to access Dataverse through a reproducible workflow. It does have some version control features as it can save each version that is uploaded. Finally it is difficult to collaborate  with Dataverse. Changes to a data set must be uploaded to the site manually, then manually downloaded. There are also no direct ways for non-coauthors to suggest changes.
+Many journals--Political Analysis for example--require data used in articles they publish to be uploaded to a service like Dataverse. Dataverse is a stable form of storage that is easily accessible for anyone with an internet connection. It is however, difficult to incorporate Dataverse into a research workflow. Unlike Dropbox, for example, there is no way to automatically update a data set on Dataverse. You have to point and click to upload data files for each version. It is difficult to access data through a statistical program such as Stata or R. The data needs to be downloaded by pointing and clicking and then loaded into these programs. It does have some version control features. It saves each version that is uploaded. Finally it is difficult to collaborate using Dataverse. Changes to a data set must be uploaded to the site manually, then manually downloaded. There are also no direct ways for non-coauthors to suggest changes.
 
-Dataverse is good for what it is designed to do: store a snapshot of a data set for replicating specific published results. However, it is difficult to use it to (a) store and access data as part of an ongoing workflow. It is does not make collaboration easy, especially by non-coauthors.
+Dataverse is good for what it is designed to do: store a snapshot of a data set for replicating specific published results. However, it is difficult to use it to store and access data as part of an ongoing workflow and it does not enable social data set development and verification.
 
-\todo[inline]{Add info on selective incentives}
+\section{Data on GitHub}
 
-\section{Storing}
+GitHub can meet the four criteria for data set storage. In this section I will demonstrate how to use GitHub for data set storage, version control, access, and collaboration. I focus specifically on specific particularly important aspects of each feature rather than providing a complete overview of how to use Git and GitHub. In this section I refer to a data set stored on GitHub of countries' Gallagher Electoral Disproportionality index that I compiled \citep[see][]{Gallagher1991,Carey20011}. The data set and more information is avalialble at: \url{http://christophergandrud.github.com/Disproportionality_Data/}.
 
-Git stores data in what it call's repositories, repos for short. You can think of these as parent folders for a research project or data set. GitHub hosts these folders remotely in the cloud.
+\subsection{Storing and Version control}
+
+GitHub remotely stores files in what Git terms ``repositories", repos for short. You can think of repos as parent folders for a research project or data set. Git version controls these files and GitHub hosts these folders remotely in the cloud.
+
+\paragraph{Tagging versions}
+
+Git \texttt{tag}s function as bookmarks for major versions of a Git repository. They are particularly useful for demarcating the version of a data set used in a particular publication, for example. creating tags is simple. Imagine we want to tag the second major version of a data set, the one we used for a publication:
+
+<<TagCreate, eval=FALSE, engine='sh'>>=
+git tag -a v2 -m 'version used in CITE'
+@
+
+\noindent The command option \texttt{-a} means add, \texttt{v2} is the version number, and \texttt{-m} adds a message, in this case the publication publications citation information. Then simply \texttt{push} the tags to GitHub:
+
+<<PushTage, eval=FALSE, engine='sh'>>=
+git push --tags
+@
+
+\noindent Now on GitHub there will be a list with the tag and an option to view and download that specific version of the data. For example:
+
+\includegraphics[width=0.47\textwidth]{images/GitTag.png}
+
 
 \paragraph{Binary files}
 
 \section{Accessing data}
 
-GitHub offeres a number of ways to make data publicly accessible. Public repositories can be viewed  and downloaded by anyone using the website. On a repositories webpage Plain-text data stored on GitHub can be directly loaded into R. This not only makes data gathering somewhat simpler--you don't have to go to a website, download a file, open it in Excel 
+GitHub offeres a number of ways to make data publicly accessible. Public repositories can be viewed  and downloaded by anyone using the website. On a repositories webpage Plain-text data stored on GitHub can be directly loaded into R. This not only makes data gathering somewhat simpler--you don't have to go to a website, download a file, open it in Excel, then convert it to a file that can be opened by your statistical analysis program of choice. 
 
 \paragraph{Set up and Update}
 
 
 \paragraph{Access directly from R}
 
-Loading this data normally takes a few lines of code, but I've created a function that simplifies the process of load data from GitHub into an R data frame.\footnote{The function is based on \emph{devtools}' \citep{R-devtools} \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
+Loading this data normally takes a few lines of code, but I've created a function that simplifies the process of load CSV or tab-delimited data from GitHub into an R data frame.\footnote{The function is based on \emph{devtools}' \citep{R-devtools} \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \cite{R-devtools}.
 
 <<LoadGist, message=FALSE, tidy=FALSE>>=
 # Load source_GitHubData
@@ -96,7 +117,11 @@ Loading this data normally takes a few lines of code, but I've created a functio
 devtools::source_gist("4466237")
 @
 
-\noindent The URL for the raw version of the electoral disproportionality data is \url{http://bit.ly/Ss6zDO}.\footnote{I used bitly (\url{http://bitly.com/}) to shorten the URL so that it would fit on the page more easily. The full URL is: \url{https://raw.github.com/christophergandrud/Disproportionality_Data/master/Disproportionality.csv}.}  To download the data using \verb|source_GitHubData| simply type.
+\noindent The main argument in \texttt{source\_GitHubData} is the \texttt{url}. You just set this as the URL for the \emph{raw} version of data file you want to download. The raw version is the version with only the text-file (no extra HTML markup). You get this by clicking on the the file's GitHub page: 
+
+\includegraphics[width=0.4\textwidth]{images/Raw.png}
+
+The raw URL for tagged versions of the data are also accessible. The URL for the raw version of the electoral disproportionality data is \url{http://bit.ly/Ss6zDO}.\footnote{I used bitly (\url{http://bitly.com/}) to shorten the URL so that it would fit on the page more easily. The full URL is: \url{https://raw.github.com/christophergandrud/Disproportionality_Data/master/Disproportionality.csv}.}  To download the data using \verb|source_GitHubData| simply type.
 
 <<DispropDownload, message=FALSE, tidy=FALSE>>=
 # Download data
@@ -112,16 +137,11 @@ When a researcher uses data they accessed via GitHub how can they cite it? A com
 used later on. Second, it would be difficult to use this citation to acknowledge contributions made by contributors who did not work on the original data set, but contributed to later versions. In addition to citing the original publication I suggest using using the standard set by \cite{Aitman2007} and modifying it slightly to take advantage of the specific version information available on GitHub. They propose that data set citations should included:
 
 \begin{itemize}
-  - the authors name, 
-  - date,
-  - data set title,
-  - a unique global identifier,
-
+  \item the authors name, 
+  \item date,
+  \item data set title,
+  \item a unique global identifier, such as a Digital Object Identifier (DOI),
 \end{itemize}
-
-
-
-\section{Version control}
 
 \section{Collaboration}
 
