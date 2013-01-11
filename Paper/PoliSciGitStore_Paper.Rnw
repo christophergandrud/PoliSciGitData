@@ -63,7 +63,7 @@ The least robust form of data storage currently used, is only storing data on an
 
 \paragraph{General purpose cloud storage}
 
-Dropbox and other non-Git cloud storage service offer a much more robust form of storage. These services generally work by syncing files stored on individual computers with those on cloud servers. Access is also much better. These services usually can be accessed via desktop programs, mobile apps, and websites. Because files stored on individual computers are automatically synced with the cloud serves it is very easy to incorporate them into a workflow. General purpose cloud storage services also make it possible to share files and folders via URL links. Dropbox has a basic version control system. Everytime you save a file a version is saved on Dropbox. If you are using Dropbox for free old versions are only saved for 30 days.\footnote{Old versions are stored for longer with paid accounts.} Collaboration with coauthors is very easy because folders can be shared. This means that official collaborators (those given write access to the folder) can easily make changes to files in the folder and these changes are automatically synced for all users.\footnote{This can create problems if multiple authors are making changes to the same files at the same time. For a discussion of file conflicts see \citep{Fredrickson2011}.} However noncoauthors, without write access to the shared folder cannot easily make changes. They must email one of the researchers with write access to suggest updates.
+Dropbox and other non-Git cloud storage service offer a much more robust form of storage. These services generally work by syncing files stored on individual computers with those on cloud servers. Access is also much better. These services usually can be accessed via desktop programs, mobile apps, and websites. Because files stored on individual computers are automatically synced with the cloud serves it is very easy to incorporate them into a workflow. General purpose cloud storage services also make it possible to share files and folders via URL links. Dropbox has a basic version control system. Everytime you save a file a version is saved on Dropbox. If you are using Dropbox for free old versions are only saved for 30 days.\footnote{Old versions are stored for longer with paid accounts.} In addition you could use Git with a data set stored on Dropbox. Collaboration with coauthors is very easy because folders can be shared. This means that official collaborators (those given write access to the folder) can easily make changes to files in the folder and these changes are automatically synced for all users.\footnote{This can create problems if multiple authors are making changes to the same files at the same time. For a discussion of file conflicts see \citep{Fredrickson2011}.} However noncoauthors, without write access to the shared folder cannot easily make changes. They must email one of the researchers with write access to suggest updates.
 
 \paragraph{Dataverse}
 
@@ -79,11 +79,11 @@ GitHub can meet the four criteria for data set storage. In this section I will d
 
 Version control is an integral part of how GitHub stores files. GitHub remotely stores files in what Git terms ``repositories", repos for short. You can think of repos as parent folders for a data set. They would contain the data and description files. Git version controls these files and GitHub hosts these folders remotely in the cloud.\footnote{Specifically, GitHub files are stored on Rackspace (\url{http://www.rackspace.com/}).} 
 
-It is free to store files on GitHub as long as they are in public repositories. Anyone can see the contents of public repositories, including all previous versions.\foonote{Private repositories are available that allow only official contributors to see them. These require a paid account.} Users can have unlimited public repositories There is a soft storage size limit of one gigabyte per repository. This should be more than enough for most social science data sets if they are stored in plain-text formats. Here is a portion of the electoral disproporationality repository's main page:
+It is free to store files on GitHub as long as they are in what GitHub calls public repositories. Anyone can see the contents of public repositories, including all previous versions.\foonote{Private repositories are available that allow only official contributors to see them. These require a paid account.} Users can have unlimited public repositories There is a soft storage size limit of one gigabyte per repository. This should be more than enough for most social science data sets if they are stored in plain-text formats. Here is a portion of the electoral disproporationality repository's main page:
 
 \includegraphics[width=0.46\textwidth]{images/MainPage.png}
 
-Git is a very powerful version control system, especially for text files. For these types of files, rather than saving the whole file like Dropbox and Dataverse, Git only saves the actual changes when you ``commit" a version of the files to the repository. Each commit in a repo is given a unique SHA-1 number identifiying it. Once changes made on your computer are commited they can be ``pushed" to the remote GitHub version of the repo. A repo's GitHub website allows you to view all of the changes that have been made to it.
+Git is a very powerful version control system, especially for text files. For these types of files, rather than saving the whole file like Dropbox and Dataverse, Git only saves the actual changes when you \texttt{add} a file to the repository and then \texttt{commit} a version of the file to the repository. Each commit in a repo is given a unique SHA-1 number identifiying it. Once changes made on your computer are commited they can be ``pushed" to the remote GitHub version of the repo. A repo's GitHub website allows you to view all of the changes that have been made to it.
 
 \paragraph{Version Control \& Contributor analytics}
 
@@ -129,10 +129,12 @@ There are many ways to access data stored on GitHub and incorporate it into your
 
 Repositories can be downloaded in full. This is called cloning. You can do this by clicking the \texttt{Clone in . . .} button on the GitHub repositories' website. It can also be done in the command line using the repository's address. For example, the disproportionality data's clonable address is: \url{https://github.com/christophergandrud/Disproportionality_Data.git}. 
 
+{\small
 <<Clone, eval=FALSE, engine='sh'>>=
 git clone https://github.com/christophergandrud/
   Disproportionality_Data.git
 @
+}
 
 \noindent Note that in real life the adderss needs to be on the same line. Also remember to change the working directory to the place where you want to have the repo saved using the \texttt{cd} command before cloning it.
 
@@ -185,41 +187,71 @@ We can easily use \citeauthor{Aitman2007}'s citation standards for GitHub reposi
 
 \paragraph{Showcase a data set with GitHub Pages}
 
-Each public repository's GitHub website allows anyone full access to the data. However, these pages may be confusing for those with out experience with a version control system. To solve this problem GitHub Pages allows you to very easily create a simple webpage for the repository. 
+Each public repository's GitHub website allows anyone full access to the data. However, these pages may be confusing for those with out experience with a version control system. To solve this problem GitHub Pages\footnote{\url{http://pages.github.com/}} allows you to very easily create a simple webpage for the repository. These pages include links to download the entire repository. You can of course also add links with specific files.
+
+To create your repository's page navigate to the repository's normal webpage. Then click \texttt{Settings} \textrightarrow{} \texttt{Automatic Page Generator}. By default it will load the README file as the content of the webpage. You can change this, add a Google Analytics tracking ID\footnote{\url{http://www.google.com/analytics/}} to gather information on who visits the page, and choose a style. Here is a sample of the disproportionality data's page:
+
+\includegraphics[width=0.45\textwidth]{images/Pages.png}
 
 \subsection{Collaboration}
 
-Compared to the status quo social science data storage methods GitHub is uniquely strong for enabling collaboration both between official project collaborators and others.
-
-It's important to emphasise that 
+Compared to the status quo social science data storage methods GitHub is uniquely strong for enabling collaboration both between coauthors and even non-coauthors who may may be able to help develope and verify the data set.  
 
 \paragraph{Coauthors}
 
-Public repositories can have an unlimited number of collaborators.\footnote{On the repositories' GitHub site click \texttt{Settings} \textrightarrow \texttt{Collaborators}}
+Public repositories can have an unlimited number of collaborators.\footnote{On the repositories' GitHub site click \texttt{Settings} \textrightarrow \texttt{Collaborators}} Collaborators have the same priveleges to make changes to the repository. They all do so in the same way. There is one important thing to note. If multiple collaborators are actively working on a data set they need to add an extra step to their Git workflow. They need to \texttt{pull} their collaborator's changes and resolve any conflicting files before pushing the changes to GitHub. Here is a full example:
+
+<<Collaborate, eval=FALSE, engine='sh'>>=
+# Add new files to Git
+git add .
+
+# Commit the changes
+git commit -am "A message"
+
+# Pull collaborator's commits
+git pull
+
+# Push changes to GitHub
+git push origin master
+@
+
+\todo[inline]{Zachary, are you thinking of discussing some of these commands in more detail?}
+
+\paragraph{Non-Coauthors: Pull requests}
+
+People who want to make changes to a repository, but are not collaborators can make pull requests. All they need are GitHub accounts. Pull requests are basically specific changes to a file that someone suggests. Requesters can also include comments about why they are making the request. GitHub also has a discussion forumn to discuss these comments. It is then up to the repository's owners to decide whether or not to accept the requested changes. If they accept the changes, they are made instantly and a full record of who made the changes is kept.
+
+If someone notices a small error--e.g. a misspelling, a misclassification--or other improvement that they think should be made to a data set they can make a pull request by navigating to the GitHub page for the specific file they think needs to be changed. Then they click \texttt{Edit}, which is located next to the \texttt{Raw} button (see above). Clicking this button ``forks" the repository, i.e. gives you a copy you can change. They will see a window like this:
+
+\includegraphics[width=0.46\textwidth]{images/PullRequest.png}
+
+\noindent In this window they can make their proposed changes and add a comment about what the changes are before clicking \texttt{Propose File Change}.
+
+For longer file changes, for example if someone updates a data set, simply fork the data set's repository, by clicking the \texttt{Fork} button on the upper right corner of its webpage. They can then make changes to the forked repository as if it was their own. When they are ready to suggest the changes be included they can just click the \texttt{Pull Request} button at the top center of the forked repository. For more information on forking and pull requests see the GitHub article on the topic: \url{https://help.github.com/articles/using-pull-requests}.
 
 \paragraph{Issues}
 
+GitHub repositories also have an ``Issues" area that allows any other GitHub user to make a comment on the repo. These tend to include general suggests for how to improve the files or questions about the repo that may be of general interest. Anyone can respond in the Issues area.
+
 \paragraph{Repo Wiki}
+
+GitHub provides a very easy to use set of features for creating nicely formated repository wiki's. For a data set repo, short articles could be developed giving details about how a data set was created for example. Non-official collaborators can add to repo wikis. Like pull requests, their changes are subject to approval by one of the repository's owners.
 
 \paragraph{Follow a repository}
 
-If you are a GitHub member you can follow a public repository, even if you aren't a collaborator, that way you will be able to see any updates that are made to the data set it contains.
-
-\paragraph{Pull requests}
-
-\paragraph{Selective incentives}
-
-As social scientists we might wonder why people would contribute to improving publicly available data sets when they will not see a direct benefit. If a repository had many non-official contributors it would be impracticle to cite all of them whenever someone used the data set, for example.
-
-However, GitHub offers many ways  
+If you are a GitHub member you can follow a public repository, even if you aren't a collaborator, This gives you a Facebook-style newsfeed\footnote{See \url{https://www.facebook.com/help/327131014036297/}.} where you can to see any updates that are made to the data set repository. 
 
 \paragraph{Passing on the data set}
 
 Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining it's entire version history. Simply add a collaborator to the repository. Then enter the collaborator's GitHub username. They will then have the same privaleges to manage the repository as you did.
 
+\paragraph{Selective incentives}
+
+GitHub not only provides technology--particularly pull requests--for social data development and verification, but it also gives selective incentives that can add motivation to do so. Why would people actively contribute to improving publicly available data sets, especially those primarily associated with other authors? If a repository had many non-official contributors it would be impracticle to cite all of them whenever someone used the data set, for example. By keeping track of who made what changes and providing numerous ways to quantify and visualize each member's contribution GitHub provides strong selective incentives to collaborate. Perhaps one day social scientists could even use GitHubs descriptive statistics when they meet highering and promotion committees.   
+
 \section{Conclusion}
 
-I've argued that Git and GitHub offer clear advantages for storing, accessing, version controlling, collaborating, on social science data. 
+In this article I have tried to show that GitHub is a very good option for storing social science data in the cloud. Admittadly it has more of a learning curve than the incumbent options. However, I hope to have demonstrated that it is at least as good as the alternatives in terms of stable storage, access, version control, and collaboration.  It is by far better at for enabling social data development and verification. Hopefully by using a service like GitHub that both makes collabotration easy and provides selective incentives to do so we can improve the social science community's ability to utilize its collective knowledge to have more complete and robust data sets with which to answer our questions.
 
 
 
