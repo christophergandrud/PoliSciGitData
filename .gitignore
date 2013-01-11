@@ -7,7 +7,6 @@
 cache/*
 figure/*
 *.log
-*.pdf
 *.gz
 *.tex
 # R byproduct files
