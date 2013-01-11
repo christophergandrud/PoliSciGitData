@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%
-% Using GitHub to Store and Collaborate on Political Science Data
+% GitHub: Putting the social in social science data set development and verification
 % Christopher Gandrud
-% 10 January 2013
+% 11 January 2013
 %%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -26,7 +26,7 @@
 \usepackage[utf8]{inputenc} 
 
 %%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Using GitHub and R to Store and Collaborate on Political Science Data}
+\title{GitHub: Putting the social in social science data set development and verification}
 
 \author{Christopher Gandrud \\
                 {\emph{Yonsei University}}\footnote{Email: \href{mailto:gandrud@yonsei.ac.kr}{gandrud@yonsei.ac.kr}. I discuss the ideas from this article in much more detail in my forthcoming book ``Reproducible Research with R and RStudio" (Chapman and Hall).}} 
@@ -36,38 +36,38 @@
 \maketitle
 
 \begin{quote}
-  \emph{I can’t send you my data b/c I think you might find out I made an error. \#overlyhonestmethods  (tweeted by Charlisle Rainey, 1/10/2013)}
+  \emph{I can't send you my data b/c I think you might find out I made an error. \#overlyhonestmethods  (tweeted by Charlisle Rainey, 1/10/2013)}
 \end{quote}
 
-A data set is created, analyses are run, an article is published. The data set languishes. The researchers who create it move on to other projects. Maybe someone else updates part of the data set for their own work, the original is not changed. Maybe another researcher finds a mistake in the original data set. They may email the original authors informing them of this, but the data set may still not be corrected. The development and management of political science data sets often do not take advantage of knowledge distributed in the political science community. This is partially because the storage tools political sciencist often use do not actually encourage collaboration, especially from non-coathors.
+A data set is created, analyses are run, an article is published, the data set languishes. The researchers who create the data set move on to other projects. Maybe someone else is able to access the data and they update part of it for their own work, but the original is not changed and the updates not widely known about. Maybe another researcher finds a mistake in the original data set. They email the original authors suggesting corrections. The original authors may or may not make the changes. Some researchers may even be reluctant to make their data available at all because of a fear that someone may find a mistake in it. These are all examples of ways that the development and management of social science data sets do not take advantage of knowledge distributed in the social science community. These problems are partially caused by the data storage tools social sciencist use. Despite rapid recent advances in social technologies--Twitter, Facebook, Skype, and so on--the tools many social scientists use do not make it easy to collaboratively develop and verify data sets, especially for people not involved in creating the original data.
 
-In this brief article I argue that the cloud file storage service GitHub\footnote{https://github.com/} offers a comprehensive data storage service for political scientists with unique tools for collaboratively developing and correcting errors in data sets. It does so in a way that that fits directly into a a highly reproducible workflow, particularly one that also includes R.\footnote{GitHub can be used to store and develop entire political science research projects, not just data. However, I do not directly address this here.} 
+In this brief article I show that GitHub\footnote{https://github.com/} offers a comprehensive data storage service for social scientists with unique tools for \emph{social data set development and verification}, i.e. correcting errors. GitHub also fits directly into a highly reproducible workflow, particularly one that also includes R.\footnote{GitHub can be used to store and develop entire social science research projects, not just data. However, I do not directly address this here.}
 
-GitHub was originally created as a way for software developers to work together on software projects using the Git version control system. It seems strange then to suggest that this service would be useful for political scientists building and maintaining data sets. However, a software program and many political science data sets are fundamentally similar in that they are basically just collections of text files.\footnote{Similarly, \citeauthor{Bowers2011} argues that data analysis is computer programming \citeyearpar[2]{Bowers2011}.} GitHub is just a means of storing and version controlling (e.g. track changes) text files. So if a political scientist's data is a plain-text format such as comma-separated values (CSV) and has accompanying files in, for example plain text (TXT) format, that describe the variables. If this is the case, then we can take full advantage of GitHub's features.
+GitHub was originally created and is widely used as a tool for software developers to work together on software projects using the Git\footnote{\url{http://git-scm.com/}} version control system. Though GitHub is often used by social scientists for statistical package development\footnote{For example the \emph{Zelig} R package \citep{Zelig2008,R-zelig} is now hosted on GitHub. See \url{https://github.com/IQSS/Zelig}.} it seems strange to suggest that this service would be useful for social scientists for building and maintaining data sets. However, a software program and many social science data sets are fundamentally similar. They are basically just collections of text files.\footnote{Similarly, \citeauthor{Bowers2011} argues that data analysis is computer programming \citeyearpar[2]{Bowers2011}.} GitHub is just a means of storing and version controlling text files. So if a social scientist's data is in a plain-text format, such as comma-separated values (CSV) for quantitatitve data,\footnote{All major statistical programs as well as Microsoft Excel and Apple's Numbers can save and open files in plain-text formats like CSV.} and has accompanying files variable description files also in a plain text format--e.g. TXT plain text or Markdown (MD), then they can take full advantage of GitHub's features for social collaboration and verification.
 
-In this article I first discuss basic features that we would want from a cloud service to store political science data: stable storage, access, version control, and collaboration. Then I discuss how strong these features are in three methods currenlty used to store data in political science. Finally, I give an overview the features in GitHub.
+In this article I first discuss basic features that we would want from a cloud service to store social science data: stable storage, access, version control, and collaboration. Then I discuss how strong these features are in three methods currenlty used to store data in social science. Though they each have their strengths none of them encourages social data set development and verification.
 
-A few brief notes before set up: To sign up for and get started with Git/GitHub see the GitHub set up page: \url{https://help.github.com/articles/set-up-git}. In this article I give examples using command line using the command line. However, there are also very good graphical user interface versions of GitHub for Mac and Windows (see the set up page). Also I focus on GitHub, but you can also use other services that work with Git such as Bitbucket\footnote{\url{https://bitbucket.org/}} for many of the same functions. Finally, in this article I focus on small to medium size data sets (i.e. of about 100,000 observations or less). These sizes are very common in political science. Much larger data sets often cannot be efficiently stored in plain-text files.
+A few brief notes before getting started: To set up Git andGitHub see the GitHub page: \url{https://help.github.com/articles/set-up-git}. In this article I give examples thei GitHub website and from the command line. However, there are also very good graphical user interface versions of GitHub for Mac and Windows (see the set up page). I focus on GitHub, but you can also use other services that work with Git such as Bitbucket\footnote{\url{https://bitbucket.org/}} for many of the same functions. Finally, the methods I use in this article are suitable for small to medium size data sets (i.e. of about 100,000 observations or less) common in social science. Much larger data sets often cannot be efficiently stored in plain-text files, so GitHub is probably not a suitable storage service for them.
 
 \section{What do we need from cloud data storage?}
 
-A cloud storage service for political science data needs to enable at least four things: \emph{stable storage}, \emph{access}, \emph{version control}, and \emph{collaboration}. Obviously a cloud storage service needs to be a stable and reliable platform for keeping data sets on. Data stored on it needs to be accessible to both collaborators and people who wish to reproduce an analysis \citep{Fomel2009} or use the data in a new project so as to avoid effort duplication \citep{Kelly2006,King1995}. A key part of access is that the data set, both developement and use, can be easily tied into researchers' workflow. The service needs to allow changes to be tracked over time so that the development of the data set can be understood and researchers are able to revert to old versions. See \cite{Bowers2011}, \cite{Healey2011} and \cite{Fredrickson2011} for discussions of the importance of version control. Finally, a cloud data storage service should enable the data set to be developed and improved by multiple collaborators, both coauthors and others who might be able to add information or correct mistakes. 
+A cloud storage service for social science data needs to enable at least four things: \emph{stable storage}, \emph{access}, \emph{version control}, and \emph{collaboration}. Obviously a cloud storage service needs to be a stable and reliable platform for keeping data sets on. Data stored on it needs to be accessible to both collaborators and people who wish to reproduce an analysis \citep{Fomel2009} or use the data set in a new project \citep{Kelly2006,King1995}. Another key part of access is that the data set, both developement and use, can be easily tied into researchers' workflows. The service needs to include version control--similar to track changes in a word processing program--so that the development of the data set can be understood and researchers are able to revert to old versions. See \cite{Bowers2011}, \cite{Healey2011} and \cite{Fredrickson2011} for discussions of the importance of version control. Finally, a cloud data storage service should make collaboration easy. Collaboration should not be limited to coauthors. It should be possible to collaborate with non-coauthors to take advantage of knowledge (and motivation) distributed throughout the social science community. Ideally, social data set development and verification will keep data sets more up-to-date and more accurate. 
 
-\section{Data storage: the political science status quo}
+\section{Data storage: the social science status quo}
 
-Political science data is often stored in at least three ways. They may store it locally on their computer, on a cloud storage service such as Dropbox\footnote{\url{https://www.dropbox.com/}} or Google Cloud Drive, \footnote{\url{https://drive.google.com/}} or they may store their data on a dedicated data hosting service, notably Dataverse\footnote{http://thedata.org/}. Each of these data storage methods have their strengths stable storage, access, version control, and collaboration. Though each are lacking in at least one important way.
+Social science data is often stored in at least three ways. It may be stored locally on a researcher's computer, on a general purpose cloud storage service such as Dropbox\footnote{\url{https://www.dropbox.com/}} or Google Cloud Drive,\footnote{\url{https://drive.google.com/}} or data may be stored on a specialized research hosting service, notably Dataverse.\footnote{\url{http://thedata.org/}} Each of these data storage methods have their strengths in terms of stable storage, access, version control, and collaboration. Nontheless each are lacking in at least one important way and none of them promote social data development and verification.
 
-\paragraph{Stored locally/ad hoc access}
+\paragraph{Local storage}
 
-The least robust form of data storage currently used, is storing data on an individual researchers' computer. This is not a very stable form of storage as anyone that has lost all of their files when their computer died knows. The storer of the data can easily access the data when they are using that computer, but access from other computers and for coathors can be limited. Access by non-coauthors is entirely at the discression of the researcher. Version control with Git or some other program is possible. Because access is limited to users of the computer the data is stored on, Collaboration, especially by non-coauthors is extremely limited.
+The least robust form of data storage currently used, is only storing data on an individual researcher's computer. This is not a very stable form of storage as anyone that has lost all of their files when their computer died knows. The research with access to the computer can easily access the data and use it in their workflow, but access from other computers and for coathors can be limited. Access by non-coauthors is very combersome. Files must be emailed in response to individual requests. These files are not automatically updated with new versions of the data. Version control with Git or some other program is possible with locally stored data. Because access is limited to users of the computer the data is stored on, collaboration, especially by non-coauthors is extremely limited.
 
-\paragraph{Dropbox and other non-Git cloud storage}
+\paragraph{General purpose cloud storage}
 
-Dropbox and other non-Git cloud storage service offer a much more robust form of storage. These services generally work by syncing files stored on individual computers with cloud servers. Access is also much better. These services usually can be accessed via desktop programs, mobile apps, and websites. Because files stored on your computer are automatically synced with the cloud serves it is very easy to incorporate these services into your workflow. These services also make it possible share individual files via URL links. Dropbox has a basic version of version control. Everytime you save a file a version is saved on Dropbox. However, old versions are only saved for 30 days. Collaboration with coauthors is very easy via shared folders. However noncoauthors, without write access to the shared folder cannot easily make changes. They must email one of the researchers with write access to suggest changes or updates.
+Dropbox and other non-Git cloud storage service offer a much more robust form of storage. These services generally work by syncing files stored on individual computers with those on cloud servers. Access is also much better. These services usually can be accessed via desktop programs, mobile apps, and websites. Because files stored on individual computers are automatically synced with the cloud serves it is very easy to incorporate them into a workflow. General purpose cloud storage services also make it possible to share files and folders via URL links. Dropbox has a basic version control system. Everytime you save a file a version is saved on Dropbox. If you are using Dropbox for free old versions are only saved for 30 days.\footnote{Old versions are stored for longer with paid accounts.} Collaboration with coauthors is very easy because folders can be shared. This means that official collaborators (those given write access to the folder) can easily make changes to files in the folder and these changes are automatically synced for all users.\footnote{This can create problems if multiple authors are making changes to the same files at the same time. For a discussion of file conflicts see \citep{Fredrickson2011}.} However noncoauthors, without write access to the shared folder cannot easily make changes. They must email one of the researchers with write access to suggest updates.
 
 \paragraph{Dataverse}
 
-Many journals--Political Analysis for example--require data used in articles published in their pages to be uploaded to a service like Dataverse to enable replication. Dataverse is stable form of storage that is easily accessible for any one with an internet connection. It is however, difficult to incorporate services like this into a research work flow. Unlike Dropbox, for example, there is no way to automatically update a data set on Dataverse. You have to point and click to upload data each time. Also it is difficult to access data through a statistical program such as Stata or R. The data needs to be downloaded by pointing and clicking and then loaded into these programs. Because of this it is difficult to access Dataverse through a reproducible workflow. It does have some version control features as it can save each version that is uploaded. Finally it is difficult to collaborate  with Dataverse. Changes to a data set must be uploaded to the site manually, then manually downloaded. There are also no direct ways for non-coauthors to suggest changes.
+Many journals--Political Analysis for example--require data used in articles they publish to be uploaded to a service like Dataverse. Dataverse is a stable form of storage that is easily accessible for anyone with an internet connection. It is however, difficult to incorporate services like Dataverse into a research workflow. Unlike Dropbox, for example, there is no way to automatically update a data set on Dataverse. You have to point and click to upload data each time. Also it is difficult to access data through a statistical program such as Stata or R. The data needs to be downloaded by pointing and clicking and then loaded into these programs. Because of this it is difficult to access Dataverse through a reproducible workflow. It does have some version control features as it can save each version that is uploaded. Finally it is difficult to collaborate  with Dataverse. Changes to a data set must be uploaded to the site manually, then manually downloaded. There are also no direct ways for non-coauthors to suggest changes.
 
 Dataverse is good for what it is designed to do: store a snapshot of a data set for replicating specific published results. However, it is difficult to use it to (a) store and access data as part of an ongoing workflow. It is does not make collaboration easy, especially by non-coauthors.
 
@@ -106,11 +106,26 @@ Data <- source_GitHubData(
 
 \noindent Note that by default \verb|source_GitHubData| loads CSV data. You can add the argument \verb|sep = "\t"| for tab-separated data files.
 
+\paragraph{Citing GitHub data}
+
+When a researcher uses data they accessed via GitHub how can they cite it? A common practice is to cite the publication the data set was originally used in. However, this is incomplete in at least two ways. First, the version of the data used in the original publication may be different from that used 
+used later on. Second, it would be difficult to use this citation to acknowledge contributions made by contributors who did not work on the original data set, but contributed to later versions. In addition to citing the original publication I suggest using using the standard set by \cite{Aitman2007} and modifying it slightly to take advantage of the specific version information available on GitHub. They propose that data set citations should included:
+
+\begin{itemize}
+  - the authors name, 
+  - date,
+  - data set title,
+  - a unique global identifier,
+
+\end{itemize}
+
+
+
 \section{Version control}
 
 \section{Collaboration}
 
-Compared to the status quo political science data storage methods GitHub is uniquely strong for enabling collaboration both between official project collaborators and others.
+Compared to the status quo social science data storage methods GitHub is uniquely strong for enabling collaboration both between official project collaborators and others.
 
 It's important to emphasise that 
 
@@ -132,17 +147,17 @@ If you are a GitHub member you can follow a public repository, even if you aren'
 
 \paragraph{Selective incentives}
 
-As political scientists we might wonder why people would contribute to improving publicly available data sets when they will not see a direct benefit. If a repository had many non-official contributors it would be impracticle to cite all of them whenever someone used the data set, for example.
+As social scientists we might wonder why people would contribute to improving publicly available data sets when they will not see a direct benefit. If a repository had many non-official contributors it would be impracticle to cite all of them whenever someone used the data set, for example.
 
 However, GitHub offers many ways  
 
 \paragraph{Passing on the data set}
 
-Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining it's entire version history. Simply add a collaborator to the repository. Then enter the collaborator's GitHub username.} They will then have the same privaleges to manage the repository as you did.
+Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining it's entire version history. Simply add a collaborator to the repository. Then enter the collaborator's GitHub username. They will then have the same privaleges to manage the repository as you did.
 
 \section{Conclusion}
 
-I've argued that Git and GitHub offer clear advantages for storing, accessing, version controlling, collaborating, on political science data. 
+I've argued that Git and GitHub offer clear advantages for storing, accessing, version controlling, collaborating, on social science data. 
 
 
 
