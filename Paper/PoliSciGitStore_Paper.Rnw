@@ -269,7 +269,7 @@ If you are a GitHub member you can follow a public repository, even if you aren'
 
 \paragraph{Passing on the data set}
 
-Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining it's entire version history. Simply add the new data set maintainer as a collaborator. They will largely have the same privileges to manage the repository as you did. To completely transfer control simply have the new maintainer fork the repository and leave a link to the forked version at the previous location on GitHub. Forked repositories contain the entire commit history of the original repository.
+Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining it's entire version history. Simply add the new data set maintainer as a collaborator. They will largely have the same privileges to manage the repository as you did. To completely transfer control the repositorys' owner can go to the repo's GitHub page, click \texttt{Settings} \textrightarrow{} \texttt{Transfer}. The transfered repository will contain the entire commit history of the original repository.
 
 \paragraph{Selective incentives}
 
