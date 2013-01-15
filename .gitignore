@@ -8,7 +8,7 @@ cache/*
 figure/*
 *.log
 *.gz
-*.tex
+PoliSciGitStore_Paper-concordance.tex
 # R byproduct files
 .Rproj.user
 .Rhistory
