@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%
 % GitHub: A tool for social data set development and verification in the cloud
 % Christopher Gandrud
-% 15 January 2013
+% 6 May 2013
 %%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -19,7 +19,6 @@
 }
 \makeatother
 
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
 \newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
 \newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
@@ -79,15 +78,23 @@
 \usepackage{todonotes}
 \usepackage[utf8]{inputenc} 
 
+
+
+
 %%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{GitHub: A tool for social data set development and verification in the cloud}
 
 \author{Christopher Gandrud \\
-                {\emph{Yonsei University (Wonju) \& Hertie School of Governance}}\footnote{Lecture in International Relations \& Fiscal Governance Centre Fellow. Email: \href{mailto:christopher.gandrud@gmail.com}{christopher.gandrud@gmail.com}.}\footnote{The files used to create this article are available on GitHub at: \url{https://github.com/christophergandrud/PoliSciGitData}.}}
+                {\emph{Yonsei University (Wonju) \& Hertie School of Governance}}\footnote{Lecture in International Relations \& Fiscal Governance Centre Fellow. Email: \href{mailto:christopher.gandrud@gmail.com}{christopher.gandrud@gmail.com}.}\footnote{The files used to create this article are available on GitHub at: \url{https://github.com/christophergandrud/PoliSciGitData}.}\footnote{Thanks to Philip Durbin for comments.}}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 
 \begin{document}
 
 \maketitle
+
+\emph{Published in The Political Methodologist (2013, Volume 20, Issue 2)}
+
+\vspace{0.5cm}
 
 A new data set is created. Analyses are run. An article is published. The data set languishes. The data set's creators move on to other projects. Maybe someone else accesses the data and updates it for their own work. However, these updates are never connected back to the original and the updates are not widely known about. So, multiple people end up wasting time making the same updates. Maybe another researcher finds a mistake in the original data set. They email the authors suggesting corrections. The original authors may or may not make the changes. If changes are made, there are no easily accessible records of them. Some researchers may even be reluctant to make their data available at all (partially) out of fear that someone may find a mistake and they will have to spend time making tedious corrections. 
 
@@ -95,7 +102,7 @@ These are all examples of ways that the development and management of social sci
 
 In this brief article I show that GitHub\footnote{\url{https://github.com/}} offers a comprehensive data storage service for social scientists creating and using original data sets. It has unique tools for \emph{social data set development and accuracy verification}. Furthermore, GitHub fits directly into an active research workflow, particularly one that also includes R.\footnote{GitHub can be used to store and develop entire social science research projects, not just data. However, I do not directly address these other topics here.}
 
-GitHub was originally created and is widely used as a tool for software developers to work together on projects, especially open source projects, using the Git\footnote{\url{http://git-scm.com/}} version control system. It has been called the ``Facebook of programmers'' \citep{Xie2011}. Though GitHub is already often used by social scientists for statistical package development\footnote{For example the \emph{Zelig} R package \citep{Zelig2008,R-zelig} is hosted on GitHub. See \url{https://github.com/IQSS/Zelig}.} it initially seems strange for me to suggest that this service would be useful for social scientists building and maintaining data sets. However, a software program and many social science data sets are fundamentally similar. \emph{They are collections of text files}. GitHub is a means of storing, version controlling, and collaborating on text files. So if a social scientist's original data is (a) in a \textbf{plain text format}, such as comma-separated values (CSV),\footnote{All major statistical programs as well as Microsoft Excel and Apple's Numbers can save and open files in plain text formats like CSV.} and (b) has accompanying variable description files also in a plain text format--e.g. TXT plain text or Markdown (MD),\footnote{\url{http://daringfireball.net/projects/markdown/}} they can take full advantage of GitHub's features for social data set development and verification.\footnote{See Bowers \citeyearpar[3]{Bowers2011} for a discussion of the advantages of storing research files in plain text format.}
+GitHub was originally created and is widely used as a tool for software developers to work together on projects, especially open source projects, using the Git\footnote{\url{http://git-scm.com/}} version control system. It has been called the ``Facebook of programmers'' \citep{Xie2011}. Though GitHub is already often used by social scientists for statistical package development\footnote{For example the \emph{Zelig} R package \citep{Zelig2008,R-Zelig} is hosted on GitHub. See \url{https://github.com/IQSS/Zelig}.} it initially seems strange for me to suggest that this service would be useful for social scientists building and maintaining data sets. However, a software program and many social science data sets are fundamentally similar. \emph{They are collections of text files}. GitHub is a means of storing, version controlling, and collaborating on text files. So if a social scientist's original data is (a) in a \textbf{plain text format}, such as comma-separated values (CSV),\footnote{All major statistical programs as well as Microsoft Excel and Apple's Numbers can save and open files in plain text formats like CSV.} and (b) has accompanying variable description files also in a plain text format--e.g. TXT plain text or Markdown (MD),\footnote{\url{http://daringfireball.net/projects/markdown/}} they can take full advantage of GitHub's features for social data set development and verification.\footnote{See Bowers \citeyearpar[3]{Bowers2011} for a discussion of the advantages of storing research files in plain text format.}
 
 In this article I begin by discussing the features that we want from a cloud service to store social science data: stable storage, version control, access, and collaboration. Then I examine how strong these features are in three methods widely used to store social science data. Though each method has its strengths, none of them encourage social data set development and verification.
 
@@ -241,35 +248,24 @@ git checkout v2
 
 \paragraph{Access data directly from R}
 
-Loading data stored on GitHub into R for use in statistical analysis is very easy.\footnote{You can of course also load data stored on the version of the repo located on your computer.} I have created a function that loads plain text formatted data from GitHub into an R data frame ready for analysis.\footnote{The function is based on \emph{devtools}' \texttt{source\_url} command.} It's called \verb|source_GitHubData| and is stored in a GitHub Gist\footnote{Gists host code snippet. See: \url{https://gist.github.com/}.} at: \url{https://gist.github.com/4466237}. It can be loaded into R using the \verb|source_gist| command from the \emph{devtools} package \citep{R-devtools}.
+Loading data stored on GitHub into R for use in statistical analysis is very easy.\footnote{You can of course also load data stored on the version of the repo located on your computer.} The \emph{repmis} package \citep{R-repmis} function \verb|source_data| loads plain text formatted data from GitHub into an R data frame ready for analysis.\footnote{The function is based on \emph{devtools}' \texttt{source\_url} command.}
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcomment{# Load source_GitHubData}
-\hlcomment{# The functions' gist ID is 4466237}
-devtools::\hlfunctioncall{source_gist}(\hlstring{"4466237"})
-\end{alltt}
-\end{kframe}
-\end{knitrout}
+\noindent The main argument in \verb|source_data| is \texttt{url}. You set this as the URL for the \emph{raw} version of plain text data file you want to download. The raw version is the version with only the text file. You find this URL by clicking the \texttt{Raw} button on the file's GitHub page. It's next to the \texttt{Blame} button we saw earlier. If you use the URL for the most recent commit of the file, you will always download the most recent version whenever you use \verb|source_data|. The raw URLs for each commit and tagged versions of the data are also accessible if you want to use a particular version. 
 
-
-\noindent The main argument in \verb|source_GitHubData| is \texttt{url}. You set this as the URL for the \emph{raw} version of plain text data file you want to download. The raw version is the version with only the text file. You find this URL by clicking the \texttt{Raw} button on the file's GitHub page. It's next to the \texttt{Blame} button we saw earlier. If you use the URL for the most recent commit of the file, you will always download the most recent version whenever you use \verb|source_GitHubData|. The raw URLs for each commit and tagged versions of the data are also accessible if you want to use a particular version. 
-
-The URL for the raw version of the Electoral Disproportionality data is \url{http://bit.ly/Ss6zDO}.\footnote{I used bitly (\url{http://bitly.com/}) to shorten the URL so that it would fit on the page more easily. The full URL is: \url{https://raw.github.com/christophergandrud/Disproportionality_Data/master/Disproportionality.csv}.}  To download the data and put it in a data frame object called \emph{Data} using \verb|source_GitHubData| type:
+The URL for the raw version of the Electoral Disproportionality data is \url{http://bit.ly/Ss6zDO}.\footnote{I used bitly (\url{http://bitly.com/}) to shorten the URL so that it would fit on the page more easily. The full URL is: \url{https://raw.github.com/christophergandrud/Disproportionality_Data/master/Disproportionality.csv}.}  To download the data and put it in a data frame object called \emph{Data} using \verb|source_data| type:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlcomment{# Download data}
-Data <- \hlfunctioncall{source_GitHubData}(
+Data <- repmis::\hlfunctioncall{source_data}(
           url = \hlstring{"http://bit.ly/Ss6zDO"})
 \end{alltt}
 \end{kframe}
 \end{knitrout}
 
 
-\noindent Note that by default \verb|source_GitHubData| loads CSV data. You can add the argument \verb|sep = "\t"| for tab-separated (TSV) data files. You can also specify \texttt{header = TRUE} (default) or \texttt{header = FALSE}.
+\noindent Note that by default \verb|source_data| loads CSV data. You can add the argument \verb|sep = "\t"| for tab-separated (TSV) data files. You can also specify \texttt{header = TRUE} (default) or \texttt{header = FALSE}.
 
 \paragraph{Citing GitHub data}
 
@@ -284,13 +280,13 @@ When a researcher uses data they accessed via GitHub how can they cite it? A com
   \item a bridge service.
 \end{itemize}
 
-\noindent The first three are self explanatory and shared with standard citations for other types of materials. Examples of UGI include Document Object Identifiers (DOI)\footnote{http://www.doi.org/} and the Handel System.\footnote{\url{http://www.handle.net/}} They uniquely identify the data set. UNF's uniquely number a particular version of the data set. A bridge service allows you to use the DOI and UNF to link to the actual data set. Most UGI include a bridge service and create UNFs. One place to register DOIs for free (with restrictions) is the German National Library for Science and Technology.\footnote{\url{http://datacite.org/TIB}} 
+\noindent The first three are self explanatory and shared with standard citations for other types of materials. Examples of UGI include Document Object Identifiers (DOI)\footnote{http://www.doi.org/} and the Handle System.\footnote{\url{http://www.handle.net/}} They uniquely identify the data set. UNF's uniquely number a particular version of the data set. A bridge service allows you to use the DOI and UNF to link to the actual data set. Most UGI include a bridge service and create UNFs. One place to register DOIs for free (with restrictions) is the German National Library for Science and Technology.\footnote{\url{http://datacite.org/TIB}} 
 
 You can use \citeauthor{Altman2007}'s citation standards to cite specific versions--tags and commits--of a data set stored with Git on GitHub. Citation information can be displayed on the version's README.md file. This allows you to persistently cite the exact version of the data set you used to achieve a particular result. Because Git stores information about each contribution it is possible with this citation method to identify every person who has contributed to a particular version of a data set and exactly what their contribution was.
 
 \paragraph{Copyright and open data}
 
-If you are creating an original data set that you want to and can--e.g. there are no confidentiality issues--make open while retaining authorship and enabling collaboration, it is worth considering how you want to copyright the data set.\footnote{Note that raw facts in a data set cannot be copyrighted, though the present layout and procedures used to gather the data can \citep[39]{Stodden2009}.} Any copyright information can be placed in a repository's main README.md file or in a seperate LICENSE.md file. This is a common practice for open source software stored on GitHub. For discussions of why and how to copyright data see \cite{Stodden2009} and \cite{CreativeCommons}.
+If you are creating an original data set that you want to and can--e.g. there are no confidentiality issues--make open while retaining authorship and enabling collaboration, it is worth considering how you want to copyright the data set.\footnote{Note that raw facts in a data set cannot be copyrighted, though the present layout and procedures used to gather the data can \citep[39]{Stodden2009}.} Any copyright information can be placed in a repository's main README.md file or in a separate LICENSE.md file. This is a common practice for open source software stored on GitHub. For discussions of why and how to copyright data see \cite{Stodden2009} and \cite{CreativeCommons}.
 
 \paragraph{Showcase a data set with GitHub Pages}
 
@@ -359,7 +355,7 @@ If you are a GitHub member you can follow a public repository, even if you aren'
 
 \paragraph{Passing on the data set}
 
-Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining it's entire version history. Simply add the new data set maintainer as a collaborator. They will largely have the same privileges to manage the repository as you did. To completely transfer control the repositorys' owner can go to the repo's GitHub page, click \texttt{Settings} \textrightarrow{} \texttt{Transfer}. The transfered repository will contain the entire commit history of the original repository.
+Because of changing time commitments, professional interests, and so on, no one can maintain and update a data set forever. GitHub makes it easy to pass on control of a data set while maintaining its entire version history. Simply add the new data set maintainer as a collaborator. They will largely have the same privileges to manage the repository as you did. To completely transfer control the repositorys' owner can go to the repo's GitHub page, click \texttt{Settings} \textrightarrow{} \texttt{Transfer}. The transferred repository will contain the entire commit history of the original repository.
 
 \paragraph{Selective incentives}
 
@@ -382,6 +378,6 @@ However, I hope to have demonstrated that GitHub is worth learning and using for
 
 
 \bibliographystyle{apsr}
-\bibliography{PoliSciGitStore}
+\bibliography{PoliSciGitStore,NotePackages}
 
 \end{document}
